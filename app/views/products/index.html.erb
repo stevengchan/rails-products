@@ -1,0 +1,45 @@
+<% content_for :title do %>
+	Display All Products
+<% end %>
+
+<fieldset>
+	<legend>Product List</legend>
+	<table class="table">
+		<thead>
+			<tr>
+				<th>Name</th>
+				<th>Description</th>
+				<th>Pricing</th>
+				<th></th>
+			</tr>
+		</thead>
+		<tbody>
+			<% @products.each do |product| %>
+				<tr>
+					<td><%= product.name %></td>
+					<td><%= product.description %></td>
+					<td><%= product.pricing %></td>
+					<td>
+						<%= link_to(product) do %>
+							<button class="btn">Go to Product</button>
+						<% end %>
+					</td>
+					<td>
+						<%= link_to(edit_product_path(product)) do %>
+							<button class="btn">Edit Product</button>
+						<% end %>
+					</td>
+					<td>
+						<form action="/products/<%= product.id %>" method="post" style="margin: 0px;">
+							<input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+							<input type="hidden" name="_method" value="delete">
+							<button class="btn">Delete Product</button>
+						</form>
+					</td>
+				</tr>
+			<% end %>
+		</tbody>
+	</table>
+</fieldset>
+
+<%= link_to 'Add New Product', new_product_path %>

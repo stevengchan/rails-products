@@ -1,0 +1,47 @@
+<% content_for :title do %>
+	Edit Product
+<% end %>
+
+<fieldset style="margin-bottom: 30px;">
+	<legend>Edit Product</legend>
+	
+	<% if @product.errors.any? %>
+		<div class="alert alert-error alert-block">
+			<h5>Error!</h5>
+			<% @product.errors.full_messages.each do |err| %>
+				<p><%= err %></p>
+			<% end %>
+		</div>
+	<% end %>
+
+	<form action="/products/<%= @product.id %>" method="post" class="form-horizontal">
+		<input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+		<input type="hidden" name="_method" value="put">
+		<div class="control-group">
+			<label for="name" class="control-label">Name</label>
+			<div class="controls">
+				<input type="text" name="name">
+			</div>
+		</div>
+		<div class="control-group">
+			<label for="description" class="control-label">Description</label>
+			<div class="controls">
+				<textarea type="text" name="description" rows="10"></textarea>
+			</div>
+		</div>
+		<div class="control-group">
+				<label for="pricing" class="control-label">Pricing</label>
+				<div class="controls">
+					<input type="text" name="pricing">
+				</div>
+		</div>
+		<div class="control-group">
+			<div class="controls">
+				<button type="submit" class="btn btn-info">Edit</button>
+			</div>
+		</div>
+	</form>
+</fieldset>
+
+<%= link_to 'Back to All Products', products_path %>
+<%= link_to 'Show Product', @product, :style => 'margin-left: 20px;' %>

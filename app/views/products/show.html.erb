@@ -1,0 +1,20 @@
+<% content_for :title do %>
+	Display Product
+<% end %>
+
+<fieldset>
+	<legend>Product Information</legend>
+
+	<% if notice %>
+		<div class="alert alert-success alert-block">
+			<p><%= notice %></p>
+		</div>
+	<% end %>
+
+	<p><strong>Name:</strong><%= @product.name %></p>
+	<p><strong>Description:</strong><%= @product.description %></p>
+	<p><strong>Pricing:</strong><%= @product.pricing %></p>
+</fieldset>
+
+<%= link_to 'Back to All Products', products_path %>
+<%= link_to 'Edit Product', edit_product_path(@product), :style => 'margin-left: 20px;'%>
